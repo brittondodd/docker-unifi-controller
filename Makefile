@@ -13,11 +13,8 @@ RVOL = /usr/lib/unifi/data
 
 .PHONY: all build test tag_latest release ssh
 
-all: build tag_latest push
+all: build tag_latest
 
-push: push_latest
-push_latest:
-	docker push $(REPO):latest
 
 
 build:
@@ -32,7 +29,6 @@ tag_latest:
 release: test tag_latest
 	@if ! docker images $(REPO) | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(REPO) version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	@if ! head -n 1 Changelog.md | grep -q 'release date'; then echo 'Please note the release date in Changelog.md.' && false; fi
-	docker push $(REPO)
 	@echo "*** Don't forget to create a tag. git tag rel-$(VERSION) && git push origin rel-$(VERSION)"
 
 rm:
