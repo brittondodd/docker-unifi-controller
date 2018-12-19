@@ -18,12 +18,12 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 
 
 # add unifi and mongo repo
-ADD ./100-ubnt.list /etc/apt/sources.list.d/100-ubnt.list
 ADD ./101-mongo.list /etc/apt/sources.list.d/101-mongo.list
+ADD https://dl.ubnt.com/unifi/5.9.29/unifi_sysvinit_all.deb /usr/lib/unifi
 
 #Add keys for mongo and unifi
 RUN apt-get update
-RUN apt-get install -q -y unifi
+RUN apt-get install -q -y /usr/lib/unifi/unifi_sysvinit_all.deb
 
 VOLUME /usr/lib/unifi/data
 EXPOSE  8443 8880 8080 27117 3478
