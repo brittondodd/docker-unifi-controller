@@ -19,7 +19,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 
 # add unifi and mongo repo
 ADD ./101-mongo.list /etc/apt/sources.list.d/101-mongo.list
-ADD https://dl.ubnt.com/unifi/5.11.39/unifi_sysvinit_all.deb /usr/lib/unifi
+ADD https://dl.ui.com/unifi/5.11.50/unifi_sysvinit_all.deb /usr/lib/unifi
 
 #Add keys for mongo and unifi
 RUN apt-get update
